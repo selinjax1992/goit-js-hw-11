@@ -4,6 +4,7 @@ import { createGallery, clearGallery } from './js/render-functions';
 
 const refs = {
   form: document.querySelector('.js-form'),
+  loader: document.querySelector('.loader'),
 };
 
 const onFormSubmit = event => {
@@ -17,7 +18,7 @@ const onFormSubmit = event => {
     });
     return;
   }
-
+  refs.loader.classList.remove('is-hidden');
   clearGallery();
 
   getImageByQuery(query)
@@ -44,6 +45,7 @@ const onFormSubmit = event => {
     })
     .finally(() => {
       refs.form.reset();
+      refs.loader.classList.add('is-hidden');
     });
 };
 refs.form.addEventListener('submit', onFormSubmit);
